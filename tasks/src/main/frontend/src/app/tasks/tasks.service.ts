@@ -1,5 +1,5 @@
 import { Task } from './task.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -20,8 +20,13 @@ export class TasksService {
 
   saveTask(task: Task, checked: boolean) {
     task.completed = checked;
-    console.log(this.PATH.concat('/save'));
-    return this.http.post(this.PATH.concat('/save'), task);
+    const req = new HttpRequest('POST', '/api/tasks/save', task, { reportProgress: true });
+
+    return this.http.request(req);
+
+    // return this.http.post(this.PATH.concat('/save'), task);
   }
+
+
 
 }
