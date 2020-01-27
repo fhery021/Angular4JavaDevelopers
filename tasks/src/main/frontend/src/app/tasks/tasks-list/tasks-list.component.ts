@@ -1,6 +1,6 @@
-import {Task} from './../task.model';
-import {Component, OnInit} from '@angular/core';
-import {TasksService} from "../tasks.service";
+import { Task } from './../task.model';
+import { Component, OnInit } from '@angular/core';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -20,7 +20,7 @@ export class TasksListComponent implements OnInit {
       .getTasks()
       .subscribe(
         (tasks: any[]) => {
-          this.tasks = tasks
+          this.tasks = tasks;
         },
         error1 => console.log(error1));
 
@@ -35,6 +35,8 @@ export class TasksListComponent implements OnInit {
     console.log('event and the task');
     console.log(checked);
     console.log(task);
-
+    this.taskService
+      .saveTask(task, checked)
+      .subscribe(response => console.log(response), error => console.log(error));
   }
 }
